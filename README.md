@@ -1,61 +1,73 @@
 # Employee Compensation Forecasting Application
 
-This project is a Power BI-based application built as part of the Spaulding Ridge case study to help HR and business stakeholders:
+This project was developed as part of the Spaulding Ridge case study for the Management Trainee role. It provides HR and business stakeholders with an interactive way to:
 - Analyze current employee compensation
-- Simulate future compensation based on fixed or variable increments
-- View workforce distribution
-- Export actionable insights
+- Apply forecasting adjustments using a What-If slider
+- Understand employee distribution by role, experience, and location
+- Compare compensation across roles and locations
+- Export actionable data
 
 ## Tools & Technologies Used
 
-- Power BI Desktop – for dashboard creation and analysis
-- MySQL – for setting up the relational database
-- DAX (Data Analysis Expressions) – for custom calculations
-- SQL – to create tables, normalize data (3NF), and define stored procedures
-- Excel – for data preparation and loading into Power BI
-- Power BI Q&A Visual – for natural language querying
+- Power BI Desktop – for interactive visualizations and dashboard creation
+- MySQL – to build and normalize relational database tables
+- DAX – for custom calculations and dynamic measures
+- SQL Scripts – for table creation, inserts, and stored procedures
+- Excel/CSV – for uploading sample datasets
 
 ## Database Setup & Execution
 
-1. Import all `.csv` files into MySQL as separate tables
-2. Normalize tables into 3NF
-3. Use provided SQL scripts to:
-   - Create tables
-   - Insert sample data
-   - Define stored procedures
+Database Setup (MySQL)
+- Import employee-related CSV files into MySQL.
+- Normalize tables into Third Normal Form (3NF)
+- Use provided SQL scripts to:
+    * Create tables (Employee, Assignment, Role, Location, Rating)
+    *  Insert sample data (~300 rows)
+    *  Define stored procedures (e.g., GetEmployeeCompensation)
 
-4. Connect Power BI to MySQL database
-5. Perform data modeling using primary/foreign keys
-6. Load transformed tables into Power BI for visualization
+Power BI Setup
+- Connect to MySQL database via Power BI
+- Perform data modeling:
+    * Relationships: Employee → Assignment → Role/Location
+    * One-to-many relations between normalized tables
+- Load data tables and measures
+- Add visual elements with interactivity:
+    * Slicers (Role, Location, Active)
+    * KPI cards, gauges, charts, Q&A panel
 
 ## User Stories & Implementation
 
 ### User Story 1: Filter and Display Active Employees by Role
-- Used slicers for **Role**, **Location**, and **Active status**
-- Table visual displays: Name, Role, Location, Compensation
-- Added measure for `Updated_Compensation` based on slider input
-- Visuals: Bar chart comparing average compensation across locations
+- Table with: Name, Role, Location, Experience, Compensation
+- Slicers to filter by: Role, Location, and Active status
+- Gauge shows average updated compensation
+- Bar chart shows average compensation by location
 
 ### User Story 2: Group Employees by Years of Experience
-- Created calculated column `Experience_Range`
-- Used bar and pie charts to show count of employees by experience
-- Optional slicers: group by Role and Location
+- Created Experience_Range column using calculated DAX
+- Pie chart and bar chart show count of employees in each range
+- Additional breakdown possible by Role or Location
 
 ### User Story 3: Simulate Compensation Increments
-- Added What-If Parameter (`Increment_Percentage`)
-- Dynamic measure `Updated_Compensation` reflects incremented values
-- Visuals: Gauge for average updated comp, KPI cards for totals
+- Used Power BI What-If Parameter: Increment_Percentage
+- Measures:
+   * Updated_Compensation
+   * Total_Increment_Impact
+   * Compensation_Growth_Percent
+- KPI visual shows Total Increment Impact vs Target Budget
+- Gauge and card visuals reflect dynamic values
 
 ### User Story 4: Download Filtered Employee Data
 - Table visual includes: Name, ID, Role, Location, Experience, Status, Compensation
 - Export feature enabled via Power BI (ellipsis → Export Data → CSV)
 - Export reflects current filters and incremented values
 
-## Q&A Visual
+## Q&A Visual (Chatbot-style)
 - Added Power BI Q&A visual to allow users to type natural questions
-- Examples:  
-   - “Total compensation for Managers in Bangalore”  
-   - “Employees with more than 5 years experience”
+- Allows users to ask:
+    * "Average compensation by role"
+    *  "Employees in Bangalore with more than 5 years experience"
+    *  "Top 5 paid employees"
 
 ## Author
 - Jyothy Jacob 
